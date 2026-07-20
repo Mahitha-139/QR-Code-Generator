@@ -1,0 +1,26 @@
+import qrcode
+
+# 1. Define the data you want to embed in the QR code
+data = "https://google.com"
+
+# 2. Configure the QR code settings
+qr = qrcode.QRCode(
+    version=1,           # Controls the size of the QR Code (1 is smallest, 40 is largest)
+    error_correction=qrcode.constants.ERROR_CORRECT_L, # Standard error correction
+    box_size=10,         # Size of each individual square (box) in pixels
+    border=4,            # Thickness of the white border (minimum is 4)
+)
+
+# 3. Add the data to the instance
+qr.add_data(data)
+qr.make(fit=True)
+
+# 4. Create the image with custom colors
+# 'fill_color' is the QR pattern, 'back_color' is the background
+img = qr.make_image(fill_color="black", back_color="white")
+
+# 5. Save the image to your computer
+output_filename = "my_qrcode.png"
+img.save(output_filename)
+
+print(f"Success! QR code saved as '{output_filename}'")
